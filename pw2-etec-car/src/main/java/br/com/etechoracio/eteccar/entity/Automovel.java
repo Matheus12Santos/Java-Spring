@@ -1,8 +1,11 @@
 package br.com.etechoracio.eteccar.entity;
 
+import br.com.etechoracio.eteccar.enums.TipoCombustivelEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,7 +14,7 @@ public class Automovel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_AUTOMOVEL")
-    private Long automovel;
+    private Long id;
 
     @Column(name = "NR_ANO_FABRICACAO")
     private int anoFabricacao;
@@ -20,7 +23,8 @@ public class Automovel {
     private int anoModelo;
 
     @Column(name = "TP_COMBUSTIVEL")
-    private String tpCombustao;
+    @Enumerated(EnumType.STRING)
+    private TipoCombustivelEnum tipoCombustao;
 
     @Column(name = "NR_PRECO", columnDefinition = "numeric")
     private Double nrPreco;
@@ -28,7 +32,11 @@ public class Automovel {
     @Column(name = "NR_KM_ATUAL")
     private int nrKmAtual;
 
-    @Column(name = "ID_MODELO")
-    private Long idModelo;
+    @JoinColumn(name = "ID_MODELO")
+    @ManyToOne
+    private Modelo idModelo;
+
+    @Transient
+    private List<Acessorio> acessorios;
 
 }

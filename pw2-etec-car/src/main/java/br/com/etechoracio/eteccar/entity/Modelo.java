@@ -14,7 +14,7 @@ public class Modelo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_MODELO")
-    private Long modelo;
+    private Long id;
 
     @Column(name = "TX_NOME")
     private String nome;
@@ -22,7 +22,8 @@ public class Modelo {
     @Column(name = "NR_POTENCIA", columnDefinition = "numeric")
     private Double potencia;
 
-    @Column(name = "ID_MARCA")
-    private Long marca;
+    @JoinColumn(name = "ID_MARCA")
+    @ManyToOne
+    private Marca idMarca;
 
 }
