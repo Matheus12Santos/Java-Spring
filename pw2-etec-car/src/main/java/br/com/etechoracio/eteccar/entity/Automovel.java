@@ -9,7 +9,8 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity(name = "TBL_AUTOMOVEL")
+@Entity
+@Table(name = "TBL_AUTOMOVEL")
 public class Automovel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +37,11 @@ public class Automovel {
     @ManyToOne
     private Modelo idModelo;
 
-    @Transient
+    @ManyToMany
+    @JoinTable(name = "TBL_REL_AUTOMOVEL_ACESSORIO",
+        joinColumns = @JoinColumn(name = "ID_AUTOMOVEL"),
+        inverseJoinColumns = @JoinColumn(name = "ID_ACESSORIO")
+    )
     private List<Acessorio> acessorios;
 
 }
